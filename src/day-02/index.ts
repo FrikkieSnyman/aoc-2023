@@ -12,12 +12,6 @@ type Game = {
   sets: Set[]
 }
 
-const limits: Set = {
-  red: 12,
-  green: 13,
-  blue: 14,
-}
-
 const input = await readInput('day-02')
 
 const getGameId = (gameString: string): number => {
@@ -44,7 +38,7 @@ const isGamePossible = (sets: Set[], limits: Set) => {
   return sets.every((set) => isSetPossible(set, limits))
 }
 
-const getPossibleGames = (games: Game[]) => {
+const getPossibleGames = (games: Game[], limits: Set) => {
   return games.filter((game) => isGamePossible(game.sets, limits))
 }
 
@@ -58,7 +52,11 @@ export const part1 = () => {
       sets: getSets(setString)
     }
   })
-  return sum(getPossibleGames(games).map((g) => g.id))
+  return sum(getPossibleGames(games, {
+    red: 12,
+    green: 13,
+    blue: 14,
+  }).map((g) => g.id))
 }
 
 const getLimits = (game: Game): Set => {
