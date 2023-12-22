@@ -45,6 +45,7 @@ const setupDay = async (day: number) => {
   try {
     await mkdir(dir)
     await Bun.write(new URL(`input.txt`, dir.href), input ?? '')
+    await Bun.write(new URL(`example.txt`, dir.href), '')
     await Bun.write(new URL(`index.ts`, dir.href), generateTemplate(day))
 
     console.log(chalk.green.bold(`✅ Day ${formatDay(day)} set up!`))
